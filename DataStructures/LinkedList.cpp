@@ -14,7 +14,9 @@ class Node{
 };
 
 int main(){
-
+    //Statically
+    Node n1(1);
+    Node n2(2);
     
     return 0;
 }
