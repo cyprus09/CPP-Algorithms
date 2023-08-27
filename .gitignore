@@ -21,3 +21,7 @@
 # Ignore dependency directories
 /node_modules/
 /vendor/
+
+# Ignore all .dSYM files and directories
+*.dSYM
+
