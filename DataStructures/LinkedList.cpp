@@ -13,9 +13,10 @@ public:
 };
 
 void print(Node* head) {
-    while (head != NULL) {
-        cout << head->data << ' ';
-        head = head->next;
+    Node *temp = head;
+    while (temp != NULL) {
+        cout << temp -> data << ' ';
+        temp = temp -> next;
     }
 }
 
