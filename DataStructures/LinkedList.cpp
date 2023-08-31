@@ -15,14 +15,22 @@ public:
 Node * takeInput(){
     int data;
     cin >> data;
-    Node *head = NULL:
+    Node *head = NULL;
     while(data != -1){
         Node *newNode = new Node(data);
         if(head == NULL){
             head = newNode;
+        }else{
+            Node *temp = head;
+            while(temp -> next != NULL){
+                temp = temp -> next;
+            }
+            temp -> next = newNode;
         }
         cin >> data;
     }
+
+    return head;
 }
 
 void print(Node* head) {
@@ -35,21 +43,23 @@ void print(Node* head) {
 
 int main() {
 
-    //Statically
-    Node n1(1);   // Head node
-    Node* head = &n1;
-
-    Node n2(2);
-    Node n3(3);
-    Node n4(4);
-    Node n5(5);
-
-    n1.next = &n2;
-    n2.next = &n3;
-    n3.next = &n4;
-    n4.next = &n5;
-
+    Node *head = takeInput();
     print(head);
+
+
+    // //Statically
+    // Node n1(1);   // Head node
+    // Node* head = &n1;
+
+    // Node n2(2);
+    // Node n3(3);
+    // Node n4(4);
+    // Node n5(5);
+
+    // n1.next = &n2;
+    // n2.next = &n3;
+    // n3.next = &n4;
+    // n4.next = &n5;
 
     //Dynamically
     // Node *n3 = new Node(10);
