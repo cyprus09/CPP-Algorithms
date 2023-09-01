@@ -14,6 +14,7 @@ class Polynomial {
         this->degCoeff=new int[6];
         this->capacity=5;
     }
+
     //Making paramaterized constructor for defining with capacity
     Polynomial (int capacity){
         this->degCoeff=new int[capacity+1];
