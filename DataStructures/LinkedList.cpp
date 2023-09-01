@@ -34,17 +34,34 @@ Node * takeInput(){
     return head;
 }
 
-void print(Node* head) {
+void insertNode(Node *head, int i, int data){
+    Node *newNode = new Node(data);
+    int count = 0;
     Node *temp = head;
-    while (temp != NULL) {
-        cout << temp -> data << ' ';
+    while(count < i - 1){
         temp = temp -> next;
+        count++;
     }
+    Node *a = temp -> next;
+    temp -> next = newNode;
+    newNode -> next = a;
+}
+
+void print(Node* head) {
+    while (head != NULL) {
+        cout << head -> data << ' ';
+        head = head -> next;
+    }
+
 }
 
 int main() {
 
     Node *head = takeInput();
+    print(head);
+    int i, data;
+    cin >> i >> data;
+    insertNode(head, i , data);
     print(head);
 
 
