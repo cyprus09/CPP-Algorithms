@@ -55,6 +55,57 @@ Node* insertNode(Node *head, int i, int data){
     return head;
 }
 
+Node *deleteNode(Node *head, int pos){
+    if (pos == 0){
+		if (head == NULL){
+            return NULL;
+        }
+        Node *newHead = head->next;
+        delete head;
+        return newHead;
+    }
+    Node *temp = head;
+    int count = 0;
+    while (temp != NULL && count < pos - 1){
+        temp = temp->next;
+        count++;
+    }
+    if (temp == NULL || temp->next == NULL){
+		return head;
+    }
+    Node *toDelete = temp->next;
+    temp->next = temp->next->next;
+    delete toDelete;
+    return head;
+}
+
+int length(Node *head)
+{
+    int count = 0;
+	Node *temp = head;
+    while(temp != NULL){
+        count++;
+        temp = temp -> next;
+    }
+    return count;
+}
+
+void printIthNode(Node *head, int i)
+{
+    Node *temp = head;
+	int count = 0;
+	while(temp != NULL){
+		if(count == i){
+			cout << temp -> data << endl;
+			return;
+		}else{
+			temp = temp -> next;
+		}
+		count++;
+	}
+	return;
+}
+
 void print(Node* head) {
     while (head != NULL) {
         cout << head -> data << ' ';
