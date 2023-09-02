@@ -117,24 +117,18 @@ void print(Node* head) {
 int main() {
 
     Node *head = takeInput();
-    print(head);
+
+    //Node Insertion
     int i, data;
     cin >> i >> data;
     head = insertNode(head, i , data);
+    
+    //Node Deletion
+    int pos;
+	cin >> pos;
+	head = deleteNode(head, pos);
+
     print(head);
-
-
-    // //Statically
-    // Node n1(1);   // Head node
-    // Node* head = &n1;
-    // Node n2(2);
-    // n1.next = &n2;
-
-    //Dynamically
-    // Node *n3 = new Node(10);
-    // Node *head = n3;
-    // Node *n4 = new Node(20);
-    // n3 -> next = n4;
 
     return 0;
 }
