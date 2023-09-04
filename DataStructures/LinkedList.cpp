@@ -55,6 +55,18 @@ Node* insertNode(Node *head, int i, int data){
     return head;
 }
 
+Node* insertNodeRecursively(Node *head, int pos, Node* newNode){
+    if(pos == 0){
+        newNode->next = head;
+        return newNode;
+    }else if(head == NULL){
+        return head;
+    }else{
+        head -> next = InsertNode(head -> next, pos - 1, newNode);
+        return head;
+    }
+}
+
 Node *deleteNode(Node *head, int pos){
     if (pos == 0){
 		if (head == NULL){
@@ -79,6 +91,19 @@ Node *deleteNode(Node *head, int pos){
     return head;
 }
 
+Node *deleteNodeRecursively(Node *head, int pos) {
+	if(head == NULL){
+		return head;
+	}else if(pos == 0){
+		Node* a = head -> next;
+		delete head;
+		return a;
+	}else{
+		head -> next = deleteNodeRec(head -> next, pos -1);
+		return head;
+	}
+}
+
 int length(Node *head)
 {
     int count = 0;
@@ -88,6 +113,15 @@ int length(Node *head)
         temp = temp -> next;
     }
     return count;
+}
+
+int lengthRecursive(Node *head) {
+	Node *temp = head;
+	if(temp == NULL){
+		return 0;
+	}else{
+		return 1 + length(head->next);
+	}
 }
 
 void printIthNode(Node *head, int i)
