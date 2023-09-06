@@ -104,8 +104,25 @@ Node *deleteNodeRecursively(Node *head, int pos) {
 	}
 }
 
-int length(Node *head)
+Node *removeDuplicates(Node *head)
 {
+    Node *temp = head;
+	if(head == NULL){
+		return NULL;
+	}
+	while(temp != NULL && temp -> next != NULL){
+		if(temp -> data == temp -> next -> data){
+			Node *toDelete = temp -> next;
+			temp -> next = temp -> next -> next;
+			delete toDelete;
+		}else{
+			temp = temp -> next;
+		}
+	}
+	return head;
+}
+
+int length(Node *head){
     int count = 0;
 	Node *temp = head;
     while(temp != NULL){
@@ -115,7 +132,7 @@ int length(Node *head)
     return count;
 }
 
-int lengthRecursive(Node *head) {
+int lengthRecursive(Node *head){
 	Node *temp = head;
 	if(temp == NULL){
 		return 0;
@@ -124,8 +141,52 @@ int lengthRecursive(Node *head) {
 	}
 }
 
-void printIthNode(Node *head, int i)
+Node *appendLastNToFirst(Node *head, int n){	
+	if(n <= 0 || head == NULL || head -> next == NULL){
+		return head;
+	}
+    int count = 0;
+	Node *temp = head;
+	while(temp -> next != NULL){
+		temp = temp -> next;
+		count++;
+	}
+	if(n >= count){
+		return head;
+	}
+	temp = head;
+	for(int i = 0; i < count - n; i++){
+		temp = temp -> next;
+	}
+	Node *newHead = temp -> next;
+	temp -> next = NULL;
+	Node *lastNode = newHead;
+	while(lastNode -> next != NULL){
+		lastNode = lastNode -> next;
+	}
+	lastNode -> next = head;
+	return newHead;
+}
+
+Node *removeDuplicates(Node *head)
 {
+    Node *temp = head;
+	if(head == NULL){
+		return NULL;
+	}
+	while(temp != NULL && temp -> next != NULL){
+		if(temp -> data == temp -> next -> data){
+			Node *toDelete = temp -> next;
+			temp -> next = temp -> next -> next;
+			delete toDelete;
+		}else{
+			temp = temp -> next;
+		}
+	}
+	return head;
+}
+
+void printIthNode(Node *head, int i){
     Node *temp = head;
 	int count = 0;
 	while(temp != NULL){
@@ -140,12 +201,69 @@ void printIthNode(Node *head, int i)
 	return;
 }
 
-void print(Node* head) {
+void print(Node* head){
     while (head != NULL) {
         cout << head -> data << ' ';
         head = head -> next;
     }
 
+}
+
+void printReverse(Node *head)
+{
+	Node *curr = head;
+	Node *prev = NULL, *next = NULL;
+
+	while(curr != NULL){
+		next = curr -> next;
+		curr -> next = prev;
+		prev = curr;
+		curr = next;
+	}
+	head = prev;
+
+	Node *temp = head;
+	while(temp != NULL){
+		cout << temp -> data << ' ';
+		temp = temp -> next;
+	}
+}
+
+bool isPalindrome(Node *head)
+{   
+	if (head == NULL || head->next == NULL) {
+        return true; 
+    }
+
+    Node *slow = head;
+    Node *fast = head;
+    while (fast->next != NULL && fast->next->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    Node *prev = NULL;
+    Node *curr = slow->next;
+    Node *temp;
+
+    while (curr != NULL) {
+        temp = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = temp;
+    }
+
+    Node *left = head;
+    Node *right = prev;
+
+    while (right != NULL) {
+        if (left->data != right->data) {
+            return false;
+        }
+        left = left->next;
+        right = right->next;
+    }
+	return true;
 }
 
 int main() {
