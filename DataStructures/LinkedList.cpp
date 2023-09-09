@@ -246,6 +246,18 @@ void printReverse(Node *head)
 	}
 }
 
+Node *reverseLinkedListRec(Node *head)
+{
+    if(head == NULL || head -> next == NULL){
+		return head;
+	}
+	Node *rest = reverseLinkedListRec(head -> next);
+	head -> next -> next = head;
+	head -> next = NULL;
+
+	return rest;
+}
+
 bool isPalindrome(Node *head)
 {   
 	if (head == NULL || head->next == NULL) {
@@ -301,6 +313,49 @@ bool detectCycle(Node *head)
     
     return false;
 }
+
+Node *mergeTwoSortedLinkedLists(Node *head1, Node *head2){
+    
+	if(head1 == NULL){
+		return head2;
+	}else if(head2 == NULL){
+		return head1;
+	}
+
+	Node *firstHead = NULL;
+
+    if(head1 -> data <= head2 -> data){
+		firstHead = head1;
+		head1 = head1 -> next;
+	}else if(head1 -> data > head2 -> data){
+		firstHead = head2;
+		head2 = head2 -> next;
+	}
+
+	Node *firstTail = firstHead;
+
+	while(head1 != NULL && head2 != NULL){
+		Node *temp = NULL; 
+		if(head1 -> data <= head2 -> data){
+			temp = head1;
+			head1 = head1->next;
+        } else {
+			temp = head2;
+			head2 = head2->next;
+		}
+
+		firstTail -> next = temp;
+		firstTail = temp;
+	}
+
+	if (head1 != NULL) {
+    	firstTail -> next = head1;
+  	} else if (head2 != NULL) {
+    	firstTail -> next = head2;
+  	}
+	return firstHead;
+}
+
 
 int main() {
 
