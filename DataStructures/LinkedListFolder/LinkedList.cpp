@@ -216,7 +216,7 @@ Node *midPoint(Node *head)
    }
 
    Node *slow = head;
-   Node *fast = head -;
+   Node *fast = head -> next;
 
    while(fast != NULL && fast -> next != NULL){
 	   slow = slow -> next;
@@ -285,7 +285,7 @@ bool isPalindrome(Node *head)
     }
 
     Node *slow = head;
-    Node *fast = head;
+    Node *fast = head -> next;
     while (fast->next != NULL && fast->next->next != NULL) {
         slow = slow->next;
         fast = fast->next->next;
