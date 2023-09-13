@@ -143,6 +143,69 @@ Node *swapNodes(Node *head, int i, int j)
 	return head; 
 }
 
+Node *rotate(Node *head, int k) {
+     if(head == NULL || head -> next == NULL){
+          return head;
+     }
+     
+     Node *temp = head;
+     int count = 1;
+     while(temp -> next != NULL){
+          temp = temp -> next;
+          count++;
+     }
+     if(k == 0 || k == count){
+          return head;
+     }
+     
+     temp -> next = head;
+
+     k = k % count; 
+     temp = head;
+     
+     for (int i = 0; i < abs(count - k - 1); i++) {
+          temp = temp->next;
+     }
+     head = temp->next;
+     temp->next = NULL;
+
+     return head;
+}
+
+bool isPalindrome(Node *head)
+{
+    if(head == NULL || head -> next == NULL){
+		return true;
+	}
+	
+	Node *slow = head;
+    Node *fast = head->next;
+    while (fast != NULL && fast->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    Node *secondHalf = slow -> next;
+
+    slow -> next = NULL;
+    Node *prev = NULL, *curr = secondHalf, *next = NULL;
+    while (curr != NULL) {
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    }
+
+    secondHalf = prev;
+    while (head != NULL && secondHalf != NULL){
+        if (head -> data != secondHalf -> data){
+            return false;
+        }
+        head = head->next;
+        secondHalf = secondHalf->next;
+    }
+    return true;
+}
+
 Node *takeinput()
 {
 	int data;
