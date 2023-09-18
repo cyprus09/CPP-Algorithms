@@ -1,45 +1,63 @@
 #include <iostream>
 using namespace std;
-template <Typename T>
 
 class Node {
-    public:
+   public:
     int data;
     Node *next;
 
-    Node (int data){
-        this -> data = data;
+    Node(int data) {
+        this->data = data;
         next = NULL;
     }
 };
 
 class Stack {
-	// Define the data members
+	
+    Node *head;
+    int size = 0;
+
    public:
     Stack() {
-        // Implement the Constructor
+        head = NULL;
     }
 
-	/*----------------- Public Functions of Stack -----------------*/
-
     int getSize() {
-        // Implement the getSize() function
+        return size;
     }
 
     bool isEmpty() {
-        // Implement the isEmpty() function
+        if(head == NULL || size == 0){
+            return true;
+        }
+        return false;
     }
 
     void push(int element) {
-        // Implement the push() function
+        Node* newNode = new Node(element);
+        newNode -> next = head;
+        head = newNode;
+        size++;
     }
 
     int pop() {
-        // Implement the pop() function
+        if(isEmpty()){
+            return -1;
+        }
+        Node *temp = head;
+        int deleteValue = temp -> data;
+        head = head -> next;
+        delete temp;
+        size--;
+        return deleteValue;
     }
 
     int top() {
-        // Implement the top() function
+        if(isEmpty()){
+            return -1;
+        }
+        int ans = head -> data;
+        return ans;
     }
 };
 
