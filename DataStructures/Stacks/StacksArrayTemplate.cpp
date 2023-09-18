@@ -30,8 +30,8 @@ class StackArray {
                 newData[i] = data[i];
             }
             capacity *= 2;
-            data = newData;
             delete[] data;
+            data = newData;
         }
         data[nextIndex] = element;
         nextIndex++;

@@ -1,68 +1,67 @@
 #include <iostream>
 using namespace std;
 
+template <typename T>
 class Node {
    public:
-    int data;
-    Node *next;
+    T data;
+    Node<T> *next;
 
-    Node(int data) {
+    Node(T data) {
         this->data = data;
         next = NULL;
     }
 };
 
+template <typename T>
 class Stack {
 	
-    Node *head;
-    int size = 0;
+    Node<T> *head;
+    int size;
 
    public:
     Stack() {
         head = NULL;
+        size = 0;
     }
 
     int getSize() {
         return size;
     }
 
-    bool isEmpty() {
-        if(head == NULL || size == 0){
-            return true;
-        }
-        return false;
+    bool empty() {
+        return size == 0;
     }
 
     void push(int element) {
-        Node* newNode = new Node(element);
+        Node<T> *newNode = new Node<T>(element);
         newNode -> next = head;
         head = newNode;
         size++;
     }
 
-    int pop() {
-        if(isEmpty()){
+    T pop() {
+        if(empty()){
             return -1;
         }
-        Node *temp = head;
-        int deleteValue = temp -> data;
+        Node<T> *temp = head;
+        T deleteValue = temp -> data;
         head = head -> next;
         delete temp;
         size--;
         return deleteValue;
     }
 
-    int top() {
-        if(isEmpty()){
+    T top() {
+        if(empty()){
             return -1;
         }
-        int ans = head -> data;
-        return ans;
+        return head -> data;
     }
 };
 
 int main() {
-    Stack st;
+    Stack<int> st;
 
     int q;
     cin >> q;
@@ -85,7 +84,7 @@ int main() {
                 cout << st.getSize() << "\n";
                 break;
             default:
-                cout << ((st.isEmpty()) ? "true\n" : "false\n");
+                cout << ((st.empty()) ? "true\n" : "false\n");
                 break;
         }
     }
