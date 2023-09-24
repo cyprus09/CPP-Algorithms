@@ -4,32 +4,28 @@
 using namespace std;
 
 bool checkRedundantBrackets(string expression) {
-	stack<char> st; 
-  
-    for(auto& ch : expression){ 
-        if(ch == ')'){ 
-            char top = st.top(); 
-            st.pop(); 
-  
-            bool flag = true; 
-  
-            while(top != '('){ 
-                if(top == '+' || top == '-' || top == '*' || top == '/'){ 
-                    flag = false; 
+	stack<char> st;
+
+    for (int i = 0; expression[i] != '\0'; i++) {
+        if (expression[i] == ')') {
+            bool foundOperator = false;
+
+            while (!st.empty() && st.top() != '(') {
+                if (st.top() == '+' || st.top() == '-' || st.top() == '*' || st.top() == '/') {
+                    foundOperator = true;
                 }
-  
-                top = st.top(); 
-                st.pop(); 
-            } 
-  
-            if(flag == true){ 
-                return true; 
+                st.pop();
             }
-        } 
-        else{
-            st.push(ch); 
+
+            st.pop(); 
+
+            if (!foundOperator) {
+                return true;
+            }
+        } else {
+            st.push(expression[i]);
         }
-    } 
+    }
     return false;
 }
 
