@@ -1,71 +1,49 @@
-#include <stdlib.h>
-#include <stdio.h>
+#include <iostream>
+#include <vector>
+using namespace std;
 
-struct node{
-    int data;
-    struct node* left;
-    struct node* right;
+template <typename T>
+class TreeNode {
+   public:
+   T data;
+   vector<TreeNode<T>*> children;  // writing <T> is optional it just assumes the parent datatype
+   treeNode(T data){
+    this -> data = data;
+   }
 };
 
-struct node* createNode(int data){
-    struct node *n; // creating a node pointer
-    n = (struct node*) malloc(sizeof(struct node)); // Allocating memory in the heap
-    n->data = data; //Setting the data
-    n->left = NULL; // Setting the left and right children to NULL
-    n->right = NULL; // Setting the left and right children to NULL
-    return n; // Finally returning the created node
+TreeNode<int>* takeInput(){
+    int rootData;
+    cout << "Enter data: " << endl;
+    cin >> rootData;
+    TreeNode<int>* root = new TreeNode<int>(rootData);
+
+    int n;
+    cout << "Enter num of children of" << rootData << endl;
+    cin >> n;
+    for(int i = 0; i < n; i++){
+        TreeNode<int> *child = takeInput();
+        root -> children.push_back(child);
+    }
+
+    return root;
 }
 
-void postOrder (struct node* root){
-    if(root!=NULL){
-        postOrder(root->left);
-        postOrder(root->right);
-        printf("%d", root->data);
+void printTree(TreeNode<int>* root){
+    if(root == NULL){  //edge case not base case
+        return;
+    }
+    cout << root -> data << endl;
+    for(int i = 0; i < root -> children.size(); i++){
+        cout << root ->children[i]->data << ',';
+    }
+    cout << endl;
+    for(int i = 0; i < root -> children.size(); i++){
+        printTree(root->children[i]); //recursion only acts as base case incase of trees for most cases
     }
 }
 
-void preOrder (struct node* root){
-    if(root!=NULL){
-        printf("%d", root->data);
-        preOrder(root->left);
-        preOrder(root->right);
-    }
-}
-
-void inOrder (struct node* root){
-    if(root!=NULL){
-        inOrder(root->left);
-        printf("%d", root->data);
-        inOrder(root->right);
-    }
-}
-
-int main (void){
-    
-    //Constructing the root node - Using Function (Recommended)
-    struct node *p = createNode(4);
-    struct node *p1 = createNode(1);
-    struct node *p2 = createNode(6);
-    struct node *p3 = createNode(5);
-    struct node *p4 = createNode(2);
-    // The tree looks like this
-    //          4
-    //         / \
-    //        1   6
-    //       / \
-    //      5   2
-    //Linking the root node with left and right children
-    p->left = p1;
-    p->right = p2;
-    p1->left = p3;
-    p1->right = p4;
-    
-    printf("The preorder traversal for the binary tree is :");
-    preOrder(p);
-    printf("\n");
-    printf("The postorder traversal for the binary tree is :");
-    postOrder(p);
-    printf("\n");
-    printf("The ineorder traversal for the binary tree is :");
-    inOrder(p);
+int main(){
+    TreeNode<int>* root = takeInput();
+    printTree(root);
 }
