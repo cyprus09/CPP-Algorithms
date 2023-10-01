@@ -33,7 +33,7 @@ void printTree(TreeNode<int>* root){
     if(root == NULL){  //edge case not base case
         return;
     }
-    cout << root -> data << endl;
+    cout << root -> data << ":";
     for(int i = 0; i < root -> children.size(); i++){
         cout << root ->children[i]->data << ',';
     }
