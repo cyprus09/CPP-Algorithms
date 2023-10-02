@@ -63,10 +63,49 @@ bool areIdentical(TreeNode<int> *root1, TreeNode<int> * root2) {
     return identical;
 }
 
+TreeNode<int>* getNextLargerElement(TreeNode<int>* root, int x) {
+    if (root == NULL) {
+        return NULL;
+    }
+    
+    TreeNode<int>* nextLargerNode = NULL;
+    
+    if (root->data > x && (nextLargerNode == NULL || root->data < nextLargerNode->data)) {
+        nextLargerNode = root;
+    }
+    
+    for (int i = 0; i < root->children.size(); i++) {
+        TreeNode<int>* curr = getNextLargerElement(root->children[i], x);
+        
+        if (curr != NULL) {
+            if (nextLargerNode == NULL || curr->data < nextLargerNode->data) {
+                nextLargerNode = curr;
+            }
+        }
+    }
+    
+    return nextLargerNode;
+}
+
 int main() {
     TreeNode<int>* root = takeInputLevelWise();
     int x;
     cin >> x;
+
+    //check if node with value x is present
     cout << (isPresent(root, x) ? "true" : "false");
-    cout << getLargeNodeCount(root, x)
+
+    //count number of larger node values
+    cout << getLargeNodeCount(root, x);
+
+    //check if identical
+    TreeNode<int>* root1 = takeInputLevelWise();
+    TreeNode<int>* root2 = takeInputLevelWise();
+    cout << (areIdentical(root1, root2) ? "true" : "false");
+
+    //next largest
+    TreeNode<int>* ans = getNextLargerElement(root, x);
+    if (ans != NULL) {
+        cout << ans->data;
+    }
 }
