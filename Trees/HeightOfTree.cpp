@@ -46,6 +46,22 @@ void takeInput(){
     return root;
 }
 
+int getHeight(TreeNode<int>* root) {
+    if(root == NULL){
+        return 0;
+    }
+
+    int maxHeight = 0;
+
+    for(int i = 0; i < root->children.size(); i++){
+        int childHeight = getHeight(root->children[i]);
+        if(childHeight > maxHeight){
+            maxHeight = childHeight;
+        }
+    }
+    return maxHeight + 1;
+}
+
 int main() {
     TreeNode<int>* root = takeInputLevelWise();
     cout << getHeight(root);

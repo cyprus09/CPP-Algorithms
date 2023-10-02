@@ -29,6 +29,39 @@ TreeNode<int>* takeInput(){
     return root;
 }
 
+//Preorder Traversal
+void preOrder(TreeNode<int>* root){
+    if(root == NULL){
+        return;
+    }
+    cout << root -> data << " ";
+    for(int i = 0; i < root->children.size(); i++){
+        preOrder(root->children[i]);
+    }
+}
+
+//Postorder Traversal
+void postOrder(TreeNode<int>* root){
+    if(root == NULL){
+        return;
+    }
+    for(int i = 0; i < root->children.size(); i++){
+        preOrder(root->children[i]);
+    }
+    cout << root -> data << " ";
+}
+
+//Inorder Traversal
+void inOrder(TreeNode<int>* root){
+    if(root == NULL){
+        return;
+    }
+    for(int i = 0; i < root->children.size(); i++){
+        preOrder(root->children[i]);
+        cout << root -> data << " ";
+    }
+}
+
 void printTree(TreeNode<int>* root){
     if(root == NULL){  //edge case not base case
         return;
