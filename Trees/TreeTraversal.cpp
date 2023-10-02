@@ -10,6 +10,12 @@ class TreeNode {
    treeNode(T data){
     this -> data = data;
    }
+   
+   ~TreeNode() {
+        for (int i = 0; i < children.size(); i++) {
+            delete children[i];
+        }
+   }
 };
 
 TreeNode<int>* takeInput(){
@@ -51,17 +57,6 @@ void postOrder(TreeNode<int>* root){
     cout << root -> data << " ";
 }
 
-//Inorder Traversal
-void inOrder(TreeNode<int>* root){
-    if(root == NULL){
-        return;
-    }
-    for(int i = 0; i < root->children.size(); i++){
-        preOrder(root->children[i]);
-        cout << root -> data << " ";
-    }
-}
-
 void printTree(TreeNode<int>* root){
     if(root == NULL){  //edge case not base case
         return;
@@ -78,5 +73,6 @@ void printTree(TreeNode<int>* root){
 
 int main(){
     TreeNode<int>* root = takeInput();
-    printTree(root);
+    postOrder(root);
+    preOrder(root);
 }
