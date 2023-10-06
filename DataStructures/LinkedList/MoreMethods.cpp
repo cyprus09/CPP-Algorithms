@@ -206,6 +206,26 @@ bool isPalindrome(Node *head)
     return true;
 }
 
+void deleteAlternateNodes(Node *head) {
+    if(head == NULL) {
+        return;
+    }
+    
+    Node *curr = head;
+    Node *nextNode = head -> next;
+    
+    while(curr != NULL && nextNode != NULL) {
+        curr -> next = nextNode -> next;
+        curr = nextNode -> next;
+
+        Node *temp = nextNode;
+        if(curr != NULL) {
+        	nextNode = curr -> next; // if prev is null and we access its next, it will give segmentation fault 
+        }
+        free(temp);
+    }
+}
+
 Node *takeinput()
 {
 	int data;
