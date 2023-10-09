@@ -83,3 +83,35 @@ bool isNodePresent(BinaryTreeNode<int> *root, int x) {
 
     return false;
 }
+
+int height(BinaryTreeNode<int>* root) {
+    if(root == NULL){
+		return 0;
+	}
+
+	int leftHeight = height(root->left);
+	int rightHeight = height(root->right);
+	
+	return 1 + max(leftHeight, rightHeight);
+}
+
+void mirrorBinaryTree(BinaryTreeNode<int>* root) {
+   
+   if(root == NULL){
+	   return;
+   }
+
+   mirrorBinaryTree(root->left);
+   mirrorBinaryTree(root->right);
+
+	BinaryTreeNode<int>* temp = root->left;
+	root->left = root->right;
+	root->right = temp;
+}
+
+int getSum(BinaryTreeNode<int>* root) {
+    if(root == NULL){
+		return 0;
+	}
+	return root->data + getSum(root->left) + getSum(root->right);
+}
