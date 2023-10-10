@@ -116,10 +116,14 @@ BinaryTreeNode<int>* buildTreeHelper(int *preorder, int *inorder, int inStart, i
 	int rightPreStart = leftPreEnd + 1;
 	int rightPreEnd = preEnd;
 
-	BinaryTreeNode<int>* left = buildTreeHelper(preorder, inorder, leftInStart, leftInEnd, leftPreStart, leftPreEnd);
-	BinaryTreeNode<int>* right = buildTreeHelper(preorder, inorder, rightInStart, rightInEnd, rightPreStart, rightPreEnd);
+	root->left = buildTreeHelper(preorder, inorder, leftInStart, leftInEnd, leftPreStart, leftPreEnd);
+	root -> right = buildTreeHelper(preorder, inorder, rightInStart, rightInEnd, rightPreStart, rightPreEnd);
 
 	return root;
+}
+
+BinaryTreeNode<int>* buildTree(int *preorder, int preLength, int *inorder, int inLength) {
+    return buildTreeHelper(preorder, inorder, 0, inLength - 1, 0, preLength - 1);
 }
 
 BinaryTreeNode<int>* buildTree(int *preorder, int preLength, int *inorder, int inLength) {

@@ -109,6 +109,43 @@ void mirrorBinaryTree(BinaryTreeNode<int>* root) {
 	root->right = temp;
 }
 
+int diameter(BinaryTreeNode<int>* root){
+    if(root == NULL){
+        return 0;
+    }
+
+    int option1 = height(root->left) + height(root->right); //height() function described above
+    int option2 = diameter(root->left);
+    int option3 = diamter(root->right);
+
+    return max(option1, max(option2, option3));
+}
+
+//better approach for diameter of binary tree
+pair<int, int> heightDiameter(BinaryTreeNode<int>* root){
+    if(root == NULL){
+        pair<int, int> p;
+        p.first = 0;
+        p.second = 0;
+        return p;
+    }
+    pair<int, int> leftAns = heightDiameter(root->left);
+    pair<int, int> rightAns = heightDiameter(root->right);
+
+    int leftDiameter = leftAns.second;
+    int leftHeight = leftAns.first;
+    int rightDiameter = rightAns.second;
+    int rightHeight = rightAns.first;
+
+    int height = 1 + max(lh, rh);
+    int diameter = max(leftHeight + rightHeight, max(leftDiameter, rightDiameter));
+    pair<int, int> p;
+    p.first = height;
+    p.second = diameter;
+
+    return p;
+}
+
 int getSum(BinaryTreeNode<int>* root) {
     if(root == NULL){
 		return 0;
