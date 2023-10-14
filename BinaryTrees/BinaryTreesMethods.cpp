@@ -4,41 +4,6 @@
 #include "binarytree.h"
 using namespace std;
 
-BinaryTreeNode<int>* takeInputLevelWise(){
-    int rootData;
-    cout << "Enter root data: " << endl;
-    cin >> rootData;
-    if(rootData == -1){
-        return NULL;
-    }
-    
-    BinaryTreeNode<int> *root = new BinaryTreeNode<int>(rootData);
-
-    queue<BinaryTreeNode<int>*> pendingNodes;
-    pendingNodes.push(root);
-    while(!(pendingNodes.empty())){
-        BinaryTreeNode<int>* front = pendingNodes.front();
-        pendingNodes.pop();
-
-        int leftData;
-        cout << "Enter left child of " << front->data << endl;
-        cin >> leftData;
-        if(leftData != -1){
-            BinaryTreeNode<int>* leftChild = new BinaryTreeNode<int>(leftData);
-            pendingNodes.push(leftChild);
-        }
-
-        int rightData;
-        cout << "Enter right child of " << front->data << endl;
-        cin >> rightData;
-        if(rightData != -1){
-            BinaryTreeNode<int>* rightChild = new BinaryTreeNode<int>(rightChild);
-            pendingNodes.push(leftChild);
-        }
-    } 
-    return root;
-}
-
 int numNodes(BinaryTreeNode<int>* root){
     if(root == NULL){
         return 0;
@@ -188,4 +153,21 @@ bool isBalanced(BinaryTreeNode<int> *root) {
 	}
 
 	return false;
+}
+
+void printNodesWithoutSibling(BinaryTreeNode<int> *root) {
+    if(root == NULL){
+        return;
+    }
+    if(root->left == NULL || root->right == NULL){
+        if(root->left == NULL && root->right != NULL){
+            cout << root->right->data << " "; 
+        }
+        if(root->left != NULL && root->right == NULL){
+            cout << root->left->data << " ";
+        }
+    }
+
+    printNodesWithoutSibling(root->left);
+    printNodesWithoutSibling(root->right);
 }
