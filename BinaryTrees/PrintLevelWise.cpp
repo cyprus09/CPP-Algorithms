@@ -108,6 +108,39 @@ void printLevelWise(BinaryTreeNode<int> *root) {
 	}
 }
 
+//another method to print levelWise
+void printLevelWiseNew(BinaryTreeNode<int> *root) {
+    if(root == NULL){
+		return;
+	}
+
+	queue <BinaryTreeNode<int>*> nodesToPrint;
+	nodesToPrint.push(root);
+	nodesToPrint.push(NULL);
+
+	while(!nodesToPrint.empty()){
+		BinaryTreeNode<int>* curr = nodesToPrint.front();
+		nodesToPrint.pop();
+
+		if(curr != NULL){
+			cout << curr->data << " ";
+			if(curr->left != NULL){
+				nodesToPrint.push(curr->left);
+			}
+			if(curr->right != NULL){
+				nodesToPrint.push(curr->right);
+			}
+		}else{
+			if (nodesToPrint.empty())
+                    break;
+			else{
+                    cout << endl;
+                	nodesToPrint.push(NULL);
+			}
+		}
+	}
+}
+
 int main() {
     BinaryTreeNode<int>* root = takeInputLevelWise();
     printLevelWise(root);

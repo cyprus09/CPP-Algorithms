@@ -1,5 +1,6 @@
 #include <iostream>
 #include <queue>
+#include <climits>
 #include "binarytree.h"
 using namespace std;
 
@@ -109,6 +110,13 @@ void mirrorBinaryTree(BinaryTreeNode<int>* root) {
 	root->right = temp;
 }
 
+int getSum(BinaryTreeNode<int>* root) {
+    if(root == NULL){
+		return 0;
+	}
+	return root->data + getSum(root->left) + getSum(root->right);
+}
+
 int diameter(BinaryTreeNode<int>* root){
     if(root == NULL){
         return 0;
@@ -146,9 +154,38 @@ pair<int, int> heightDiameter(BinaryTreeNode<int>* root){
     return p;
 }
 
-int getSum(BinaryTreeNode<int>* root) {
-    if(root == NULL){
-		return 0;
+pair<int, int> getMinAndMax(BinaryTreeNode<int> *root) {
+	pair <int, int> ans;
+
+	if(root == NULL){
+		ans.first = INT_MAX;
+		ans.second = INT_MIN;
+		return ans;
 	}
-	return root->data + getSum(root->left) + getSum(root->right);
+
+	ans.first = root->data;
+	ans.second = root->data;
+
+	pair<int, int> leftMinMax = getMinAndMax(root->left);
+	pair<int, int> rightMinMax = getMinAndMax(root->right);
+
+	ans.first = min(ans.first, min(leftMinMax.first, rightMinMax.first));
+	ans.second = max(ans.second, max(leftMinMax.second, rightMinMax.second));
+
+	return ans;
+}
+
+bool isBalanced(BinaryTreeNode<int> *root) {
+
+	if(root == NULL){
+		return true;
+	}
+	int heightLeft = height(root->left);
+	int heightRight = height(root->right);
+
+	if(abs(heightLeft - heightRight) < 1 && isBalanced(root->left) && isBalanced(root->right)){
+		return true;
+	}
+
+	return false;
 }
