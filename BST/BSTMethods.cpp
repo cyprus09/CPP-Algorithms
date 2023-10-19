@@ -1,5 +1,6 @@
 #include <iostream>
 #include <queue>
+#include <climits>
 #include "BinarySearchTree.h"
 
 using namespace std;
@@ -36,6 +37,23 @@ void elementsInRangeK1K2(BinaryTreeNode<int>* root, int k1, int k2) {
 		cout << root->data << " ";
 		elementsInRangeK1K2(root->right, k1, k2);
 	}
+}
+
+bool isBSTUtil(BinaryTreeNode<int>* root, int minVal, int maxVal) {
+    if (root == NULL) {
+        return true; 
+    }
+
+    if (root->data < minVal || root->data > maxVal) {
+        return false;
+    }
+
+    return isBSTUtil(root->left, minVal, root->data - 1) &&
+		isBSTUtil(root->right, root->data + 1, maxVal);
+}
+
+bool isBST(BinaryTreeNode<int>* root) {
+    return isBSTUtil(root, INT_MIN, INT_MAX);
 }
 
 int main() {
