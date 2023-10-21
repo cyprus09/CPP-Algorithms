@@ -52,7 +52,6 @@ bool isBST(BinaryTreeNode<int>* root) {
 }
 
 //using class method
-
 class isBSTReturn{
     public:
     bool isBST;

@@ -5,6 +5,7 @@
 
 using namespace std;
 
+//searching where a particular node is
 bool searchInBST(BinaryTreeNode<int> *root , int k) {
 
 	bool flag = false;
@@ -21,6 +22,7 @@ bool searchInBST(BinaryTreeNode<int> *root , int k) {
 	}
 }
 
+//printing all elements within a given range
 void elementsInRangeK1K2(BinaryTreeNode<int>* root, int k1, int k2) {
 	if(root == NULL){
 		return;
@@ -39,22 +41,24 @@ void elementsInRangeK1K2(BinaryTreeNode<int>* root, int k1, int k2) {
 	}
 }
 
-bool isBSTUtil(BinaryTreeNode<int>* root, int minVal, int maxVal) {
-    if (root == NULL) {
-        return true; 
-    }
+//constructing BST from an array of integers
+BinaryTreeNode<int>* constructTreeHelper(int *input, int left, int right){
+	if(left > right){
+		return NULL;
+	}
+	
+	int mid = left + (right - left)/2;
 
-    if (root->data < minVal || root->data > maxVal) {
-        return false;
-    }
+	BinaryTreeNode<int>* root = new BinaryTreeNode<int>(input[mid]);
+	root->left = constructTreeHelper(input, left, mid - 1);
+	root->right = constructTreeHelper(input, mid + 1, right);
 
-    return isBSTUtil(root->left, minVal, root->data - 1) &&
-		isBSTUtil(root->right, root->data + 1, maxVal);
+	return root;
+}
+BinaryTreeNode<int>* constructTree(int *input, int n) {
+	return constructTreeHelper(input, 0, n - 1);
 }
 
-bool isBST(BinaryTreeNode<int>* root) {
-    return isBSTUtil(root, INT_MIN, INT_MAX);
-}
 
 int main() {
     BinaryTreeNode<int> *root = takeInput();
