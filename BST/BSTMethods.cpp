@@ -59,6 +59,72 @@ BinaryTreeNode<int>* constructTree(int *input, int n) {
 	return constructTreeHelper(input, 0, n - 1);
 }
 
+//path to a particular node
+vector<int>* getPath(BinaryTreeNode<int> *root , int data) {
+	if(root == NULL){
+		return NULL;
+	}
+
+	if(root->data == data){
+		vector<int>* output = new vector<int>();
+		output->push_back(root->data);
+		return output;
+	}
+
+	vector<int>* leftOutput = getPath(root->left, data);
+
+	if(leftOutput != NULL){
+		leftOutput->push_back(root->data);
+		return leftOutput;
+	}
+
+	vector<int>* rightOutput = getPath(root->right, data);
+	if(rightOutput != NULL){
+		rightOutput->push_back(root->data);
+		return rightOutput;
+	}else{
+		return NULL;
+	}
+	
+}
+
+//inserting a duplicate node after each node to its left
+void insertDuplicateNode(BinaryTreeNode<int> *root) {
+    if (root == NULL) {
+        return;
+    }
+
+    BinaryTreeNode<int> *newNode = new BinaryTreeNode<int>(root->data);
+    BinaryTreeNode<int> *temp = root->left;
+    root->left = newNode;
+    newNode->left = temp;
+    
+    insertDuplicateNode(temp);
+    insertDuplicateNode(root->right);
+}
+
+//lowest common ancestor of binaryTree
+int getLCA(BinaryTreeNode <int>* root , int a, int b) {
+    if(root == NULL){
+		return -1;
+	}
+	if(root->data == a || root->data == b){
+		return root->data;
+	}
+
+	int ansLeft = getLCA(root->left, a, b);
+	int ansRight = getLCA(root->right, a, b);
+
+	if(ansLeft != -1 && ansRight == -1){
+		return ansLeft;
+	}else if(ansRight != -1 && ansLeft == -1){
+		return ansRight;
+	}else if(ansLeft != -1 && ansRight != -1){
+		return root->data;
+	}else{
+		return -1;
+	}
+}
 
 int main() {
     BinaryTreeNode<int> *root = takeInput();
