@@ -88,42 +88,45 @@ vector<int>* getPath(BinaryTreeNode<int> *root , int data) {
 	
 }
 
-//inserting a duplicate node after each node to its left
-void insertDuplicateNode(BinaryTreeNode<int> *root) {
-    if (root == NULL) {
-        return;
-    }
-
-    BinaryTreeNode<int> *newNode = new BinaryTreeNode<int>(root->data);
-    BinaryTreeNode<int> *temp = root->left;
-    root->left = newNode;
-    newNode->left = temp;
-    
-    insertDuplicateNode(temp);
-    insertDuplicateNode(root->right);
-}
-
-//lowest common ancestor of binaryTree
-int getLCA(BinaryTreeNode <int>* root , int a, int b) {
+//get lowest common ancestor (lowest - most depth)
+int getLCA(BinaryTreeNode<int>* root , int val1 , int val2){
     if(root == NULL){
 		return -1;
 	}
-	if(root->data == a || root->data == b){
+	if(root->data == val1 || root->data == val2){
 		return root->data;
 	}
+	int temp1 = getLCA(root->left, val1, val2);
+	int temp2 = getLCA(root->right, val1, val2);
 
-	int ansLeft = getLCA(root->left, a, b);
-	int ansRight = getLCA(root->right, a, b);
-
-	if(ansLeft != -1 && ansRight == -1){
-		return ansLeft;
-	}else if(ansRight != -1 && ansLeft == -1){
-		return ansRight;
-	}else if(ansLeft != -1 && ansRight != -1){
+	if(temp1 != -1 && temp2 == -1){
+		return temp1;
+	}
+	if(temp1 == -1 && temp2 != -1){
+		return temp2;
+	}
+	if(temp1 != -1 && temp2 != -1){
 		return root->data;
-	}else{
+	}
+	if(temp1 == -1 && temp2 == -1){
 		return -1;
 	}
+}
+
+int replaceWithLargerNodesSumHelper(BinaryTreeNode<int>* root, int sum){
+	if(root == NULL){
+		return sum;
+	}
+	sum = replaceWithLargerNodesSumHelper(root->right, sum);
+	sum += root->data;
+	root->data = sum;
+	sum = replaceWithLargerNodesSumHelper(root->left, sum);
+
+	return sum;
+}
+
+void replaceWithLargerNodesSum(BinaryTreeNode<int> *root) {
+    replaceWithLargerNodesSumHelper(root, 0);
 }
 
 int main() {
