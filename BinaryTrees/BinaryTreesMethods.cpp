@@ -171,3 +171,41 @@ void printNodesWithoutSibling(BinaryTreeNode<int> *root) {
     printNodesWithoutSibling(root->left);
     printNodesWithoutSibling(root->right);
 }
+
+//inserting a duplicate node after each node to its left
+void insertDuplicateNode(BinaryTreeNode<int> *root) {
+    if (root == NULL) {
+        return;
+    }
+
+    BinaryTreeNode<int> *newNode = new BinaryTreeNode<int>(root->data);
+    BinaryTreeNode<int> *temp = root->left;
+    root->left = newNode;
+    newNode->left = temp;
+    
+    insertDuplicateNode(temp);
+    insertDuplicateNode(root->right);
+}
+
+//lowest common ancestor of binaryTree
+int getLCA(BinaryTreeNode <int>* root , int a, int b) {
+    if(root == NULL){
+		return -1;
+	}
+	if(root->data == a || root->data == b){
+		return root->data;
+	}
+
+	int ansLeft = getLCA(root->left, a, b);
+	int ansRight = getLCA(root->right, a, b);
+
+	if(ansLeft != -1 && ansRight == -1){
+		return ansLeft;
+	}else if(ansRight != -1 && ansLeft == -1){
+		return ansRight;
+	}else if(ansLeft != -1 && ansRight != -1){
+		return root->data;
+	}else{
+		return -1;
+	}
+}
