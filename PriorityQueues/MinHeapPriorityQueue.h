@@ -49,10 +49,8 @@ class PriorityQueue {
             return -1;
         }
 
-        int minVal = getMin();
-
-        int lastIndex = pq.size() - 1;
-        pq[0] = pq[lastIndex];
+        int ans = getMin();
+        pq[0] = pq[pq.size() - 1];
         pq.pop_back();
 
         int parentIndex=0;
@@ -79,10 +77,9 @@ class PriorityQueue {
             pq[minIndex] = temp;
             
             parentIndex=minIndex;
-
             leftChildIndex=2*parentIndex + 1;
             rightChildIndex=2*parentIndex + 2;
         }
-        return minVal;
+        return ans;
     }
 };
