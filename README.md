@@ -9,6 +9,7 @@ This repository contains C++ implementations of various data structures and algo
 - [Binary Trees](#binary-trees)
 - [Data Structures](#data-structures)
 - [Graphs](#graphs)
+- [Priority Queues](#priority-queues)
 - [Recursion](#recursion)
 - [Sorting Algorithms](#sorting-algorithms)
 - [Trees](#trees)
@@ -33,6 +34,10 @@ The "DataStructures" directory contains code related to various data structures.
 ## Graphs
 
 In the "Graphs" directory, you'll find code for graph-related algorithms and data structures. This includes graph traversal, shortest path algorithms, and more.
+
+## Priority Queues
+
+In the "PriorityQueues" directory, you'll find code for heap-related algorithms. This includes max, minHeap, k-sorted arrays and other implementations.
 
 ## Recursion
 
