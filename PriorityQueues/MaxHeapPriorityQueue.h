@@ -49,7 +49,7 @@ class PriorityQueue {
             if(pq[maxIndex] < pq[leftChildIndex]){
                 maxIndex = leftChildIndex;
             }
-            if(pq[maxIndex] > pq[rightChildIndex] && rightChildIndex > pq.size()){
+            if(pq[maxIndex] < pq[rightChildIndex] && rightChildIndex < pq.size()){
                 maxIndex = rightChildIndex;
             }
             if(maxIndex == parentIndex){
@@ -63,8 +63,7 @@ class PriorityQueue {
             parentIndex = maxIndex;
             leftChildIndex = 2*parentIndex + 1;
             rightChildIndex = 2*parentIndex + 2;
-        }
-        
+        }                
         return ans;
     }
 
@@ -75,7 +74,6 @@ class PriorityQueue {
     bool isEmpty() {
         return pq.size() == 0;
     }
-
 };
 
 int main() {
