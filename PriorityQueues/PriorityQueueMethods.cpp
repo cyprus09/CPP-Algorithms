@@ -109,6 +109,54 @@ int kthLargest(vector<int>& arr, int k) {
     return pq.top();
 }
 
+//merge K number of sorted arrays (2D vectors)
+vector<int> mergeKSortedArrays(vector<vector<int>*> input) {
+    priority_queue<int, vector<int>, greater<int>>  pq;
+    vector<int> ans;
+
+    for(int i = 0; i < input.size(); i++){
+        vector<int>* currentVector = input[i];
+        for(int j = 0; j < currentVector->size(); j++){
+            pq.push((*currentVector)[j]);
+        }
+    } 
+
+    while(!pq.empty()){
+        ans.push_back(pq.top());
+        pq.pop();
+    }
+    return ans;
+}
+
+//time taken to buy a ticket based on priority
+int buyTicket(int *arr, int n, int k) {
+    priority_queue<int> pq;
+    queue<int> ans;
+
+    for(int i = 0; i < n; i++){
+        pq.push(arr[i]);
+        ans.push(i);
+    }
+
+    int time = 0;
+
+    while(!ans.empty()){
+       if(arr[ans.front()] == pq.top()){
+           time++;
+           if(ans.front() == k){
+               break;
+           }
+           ans.pop();
+           pq.pop();
+       }else{
+           ans.push(ans.front());
+           ans.pop();
+       }
+    }
+
+    return time;
+}
+
 
 
 
