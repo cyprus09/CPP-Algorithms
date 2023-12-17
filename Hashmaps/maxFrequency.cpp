@@ -22,7 +22,7 @@ int highestFrequency(int arr[], int n) {
             maxCount = numbers[arr[i]];
             maxValue = arr[i];
         }
-    }
+     }
 
     return maxValue;
 }
