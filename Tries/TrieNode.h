@@ -24,7 +24,7 @@ class Trie{
         root = new TrieNode('\0');
     }
 
-    void insertWord(TrieNode* root, string word){
+    void insertWordHelper(TrieNode* root, string word){
         if(word.size == 0){
             root->isTerminal = true;
             return;
@@ -43,7 +43,7 @@ class Trie{
     }
 
     void insertWord(string word){
-        insertWord(root, word);
+        insertWordHelper(root, word);
     }
 
     bool search(string word) {
@@ -62,5 +62,35 @@ class Trie{
         }
         
         return false;
+    }
+
+    void removeWordHelper(TrieNode *root, string word){
+       if(word.size() == 0){
+        root->isTerminal = false;
+        return;
+       }
+
+       TrieNode* child;
+       int index = word[0] - 'a';
+       if(root->children[index] != NULL){
+        child = root->children[index];
+       }else{
+        return;
+       } 
+       removeWord(child, word.substr(1));
+
+       if(child->isTerminal == false){
+        for(int i = 0; i < 26; i++){
+            if(child->children[i] != NULL){
+                return;
+            }
+        }
+       }
+       delete child;
+       root->children[index] = NULL;
+    }
+
+    void removeWord(string word){
+
     }
 };
