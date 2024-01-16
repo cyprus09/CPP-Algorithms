@@ -88,7 +88,7 @@ vector<string> searchMaze(vector<vector<int>>& arr, int n) {
 
     findPaths(0, 0, n, arr, visited, path, result);
 
-    return result;
+    return result; 
 }
 
 class Runner {
