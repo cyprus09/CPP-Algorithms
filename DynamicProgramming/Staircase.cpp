@@ -1,31 +1,43 @@
-#include <iostream>
-#include <vector>
+#include<bits/stdc++.h>
+using namespace std;
+
+const long long mod = 1000000007;
 
 long long stairsCount(int n) {
-    std::vector<long long> ways(n + 1, 0);
+   
+   long long *stairs = new long long[n + 1];
 
-    ways[0] = 1;
-    ways[1] = 1;
+    stairs[0] = 1;
+    stairs[1] = 1;
+    stairs[2] = 2;
 
-    for (int i = 2; i <= n; i++) {
-        long long oneStep = ways[i - 1];
-        long long twoStep = (i - 2 >= 0) ? ways[i - 2] : 0;
-        long long threeStep = (i - 3 >= 0) ? ways[i - 3] : 0;
+		for(int i = 3 ;i <= n; i++) {
+			long long step2 = 0, step3 = 0;
+			long long step1 = stairs[i - 1];
 
-        ways[i] = oneStep + twoStep + threeStep;
-    }
+			if(i - 2 >= 0)
+			 step2 = stairs[i - 2] % mod;
+			if(i - 3 >= 0)
+			 step3 = stairs[i - 3] % mod;
+			stairs[i] = step1 + step2 + step3;
+		}
+		long long result = stairs[n] % mod;
+        delete[] stairs;
 
-    return ways[n];
+        return result;
 }
 
-int main() {
-    int T;
-    std::cin >> T;
 
-    while (T--) {
+int main()
+{
+    int T;
+    cin >> T;
+
+    while(T--){
         int N;
-        std::cin >> N;
-        std::cout << stairsCount(N) << std::endl;
+        cin >> N;
+        cout << stairsCount(N);
+        cout << endl;
     }
 
     return 0;
