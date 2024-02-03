@@ -15,7 +15,7 @@ long long balancedBTs(int n) {
 }
 
 //bottom-down approach
-long long balancedBTs(int n) {
+long long balancedBTs_dp(int n) {
     long long *totalTrees = new long long[n + 1];
 
     totalTrees[0] = 1;
