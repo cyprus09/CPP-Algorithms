@@ -3,8 +3,13 @@
 
 using namespace std;
 
-void print(int **edges, int n, int sv, bool *visited){
+void printBFS(int **edges, int n, int sv){
     queue<int> graphNodes;
+    bool *visited = new bool[n];
+
+    for(int i = 0; i < n; i++){
+        visited[i] = false;
+    }
     graphNodes.push(sv);
     visited[sv] = true;
 
@@ -14,10 +19,13 @@ void print(int **edges, int n, int sv, bool *visited){
         graphNodes.pop();
 
         for(int i = 0 ; i < n; i++){
-          if (visited[i] == false && edges[currentVertex][i] == 1) {
-            graphNodes.push(i);
-            visited[i] = true;
-          }
+            if(i == currentVertex){
+                continue;
+            }
+            if (! visited[i] && edges[currentVertex][i] == 1) {
+                graphNodes.push(i);
+                visited[i] = true;
+            }
         }
     }
 }
