@@ -2,7 +2,7 @@
 #include <vector>
 using namespace std;
 
-void printDFSPath(int **graph, int n, int v1, int v2, bool *visited, vector<int> &path) {
+void printDFSPath(int **graph, int v, int v1, int v2, bool *visited, vector<int> &path) {
     visited[v1] = true;
     path.push_back(v1);
 
@@ -14,9 +14,9 @@ void printDFSPath(int **graph, int n, int v1, int v2, bool *visited, vector<int>
         return;
     }
 
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < v; i++) {
         if (graph[v1][i] == 1 && !visited[i]) {
-            printDFSPath(graph, n, i, v2, visited, path);
+            printDFSPath(graph, v, i, v2, visited, path);
         }
     }
 
@@ -24,29 +24,29 @@ void printDFSPath(int **graph, int n, int v1, int v2, bool *visited, vector<int>
 }
 
 int main() {
-    int n, e; 
-    cin >> n >> e;
+    int v, e; 
+    cin >> v >> e;
 
-    int **graph = new int *[n];
-    for (int i = 0; i < n; i++) {
-        graph[i] = new int[n]();
+    int **edges = new int *[v];
+    for (int i = 0; i < v; i++) {
+        edges[i] = new int[v]();
     }
 
     for (int i = 0; i < e; i++) {
         int u, v;
         cin >> u >> v;
-        graph[u][v] = graph[v][u] = 1; 
+        edges[u][v] = edges[v][u] = 1; 
     }
 
     int v1, v2;
     cin >> v1 >> v2;
 
-    bool *visited = new bool[n]();
+    bool *visited = new bool[v];
     vector<int> path;
 
-    printDFSPath(graph, n, v1, v2, visited, path);
+    printDFSPath(graph, v, v1, v2, visited, path);
 
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < v; i++) {
         delete[] graph[i];
     }
     delete[] graph;
