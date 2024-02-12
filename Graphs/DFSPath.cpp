@@ -10,7 +10,6 @@ void printDFSPath(int **graph, int v, int v1, int v2, bool *visited, vector<int>
         for (int i = path.size() - 1; i >= 0; i--) {
             cout << path[i] << " ";
         }
-        cout << endl;
         return;
     }
 
@@ -29,7 +28,7 @@ int main() {
 
     int **edges = new int *[v];
     for (int i = 0; i < v; i++) {
-        edges[i] = new int[v]();
+        edges[i] = new int[v];
     }
 
     for (int i = 0; i < e; i++) {
