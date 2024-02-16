@@ -4,7 +4,6 @@ using namespace std;
 
 void connectedComponentsHelper(int **edges, int n, int v, vector<int> &connected, bool *visited){
     visited[v] = true;
-    connected.push_back(v);
 
     for(int i = 0; i < n; i++){
         if(i == v){
@@ -12,6 +11,7 @@ void connectedComponentsHelper(int **edges, int n, int v, vector<int> &connected
         }
         if(!visited[i] && edges[v][i] == 1){
             connectedComponentsHelper(edges, n, i, connected, visited);
+            connected.push_back(i);
         }
     }
 }
@@ -19,11 +19,14 @@ void connectedComponentsHelper(int **edges, int n, int v, vector<int> &connected
 vector<vector<int>> connectedComponents(int **edges, int n){
     vector<vector<int>> output;
     bool *visited = new bool[n]();
+    vector<int> connected;
+
     for(int i = 0; i < n; i++){
         if(!visited[i]){
-            vector<int> connected;
             connectedComponentsHelper(edges, n, i, connected, visited);
+            connected.push_back(i);
             output.push_back(connected);
+            connected.clear();
         }
     }
     delete[] visited;
@@ -33,12 +36,10 @@ vector<vector<int>> connectedComponents(int **edges, int n){
 int main() {
     int n, e;
     cin >> n >> e;
+
     int **edges = new int*[n];
     for(int i = 0; i < n; i++){
-        edges[i] = new int[n];
-        for(int j = 0; j < n; j++){
-            edges[i][j] = 0;
-        }
+        edges[i] = new int[n]();
     }
 
     for(int i = 0; i < e; i++){
@@ -50,9 +51,9 @@ int main() {
     vector<vector<int>> output = connectedComponents(edges, n);
 
     for(int i = 0; i < output.size(); i++){
-        for(int j = 0; j < output[i].size(); j++)[
+        for(int j = 0; j < output[i].size(); j++){
             cout << output[i][j] << " ";
-        ]
+        }
         cout << endl;
     }
 
@@ -61,7 +62,6 @@ int main() {
     }
 
     delete[] edges;
-    delete[] visited; 
 
     return 0;
 }
