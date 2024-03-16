@@ -12,9 +12,9 @@ Contributions are encouraged and appreciated! If you have a new algorithm or dat
 
 ## Table of Contents
 
-- [Arrays](#Arrays)
-- [Binary Search Trees (BST)](#BST)
-- [Backtracking](#BackTracking)
+- [Arrays](#arrays)
+- [Binary Search Trees (BST)](#binary-search-trees)
+- [Backtracking](#backtracking)
 - [Binary Trees](#binary-trees)
 - [Data Structures](#data-structures)
 - [Dynamic Programming](#dynamic-programming)
