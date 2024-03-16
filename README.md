@@ -12,21 +12,21 @@ Contributions are encouraged and appreciated! If you have a new algorithm or dat
 
 ## Table of Contents
 
-- [Arrays](#arrays)
-- [Binary Search Trees (BST)](#binary-search-trees)
-- [Backtracking](#backtracking)
-- [Binary Trees](#binary-trees)
-- [Data Structures](#data-structures)
-- [Dynamic Programming](#dynamic-programming)
-- [Graphs](#graphs)
-- [Hashmaps](#hashmaps)
-- [Priority Queues](#priority-queues)
-- [Recursion](#recursion)
-- [Sorting Algorithms](#sorting-algorithms)
-- [Trees](#trees)
-- [Tries](#tries)
-- [Constructors.cpp](#constructorscpp)
-- [HuffmanCode.cpp](#huffmancodecpp)
+- [Arrays](https://github.com/cyprus09/CPP-Algorithms/blob/9d6bac0fd3bf2efd9e429b3f904278d97601cca3/Arrays)
+- [Binary Search Trees (BST)](https://github.com/cyprus09/CPP-Algorithms/blob/718ddf4bde825227200ccf7764c799006cc9940e/BST)
+- [Backtracking](https://github.com/cyprus09/CPP-Algorithms/blob/46e9bcc8c519db4a18353491bd3be18893f3f9f2/BackTracking)
+- [Binary Trees](https://github.com/cyprus09/CPP-Algorithms/blob/4d9cbb43ed065330aff245a4f28a7afaf85313e6/BinaryTrees)
+- [Data Structures](https://github.com/cyprus09/CPP-Algorithms/blob/a0597b7b7b6cef0479f6e322a61e08b690dbd1c8/DataStructures)
+- [Dynamic Programming](https://github.com/cyprus09/CPP-Algorithms/blob/5130a203f463ef12236bf372b3e4ce4907ef398b/DynamicProgramming)
+- [Graphs](https://github.com/cyprus09/CPP-Algorithms/blob/60018ce658abcd6aa61647b3c1db6f50d991feb6/Graphs)
+- [Hashmaps](https://github.com/cyprus09/CPP-Algorithms/blob/8fced23ad6c91cedc01d5cb50ad5d6ef55fb9539/Hashmaps)
+- [Priority Queues](https://github.com/cyprus09/CPP-Algorithms/blob/0f5a251d6915022874da895c8a4fd919fad6b171/PriorityQueues)
+- [Recursion](https://github.com/cyprus09/CPP-Algorithms/blob/cfa646ca3a0a46894c0fd25c87a2bc99439a02b6/Recursion)
+- [Sorting Algorithms](https://github.com/cyprus09/CPP-Algorithms/blob/3814d2ae604c6fac4bc369be4058ce0ea9c591cc/Sorting_Algorithms)
+- [Trees](https://github.com/cyprus09/CPP-Algorithms/blob/6dbea3d1fa529fff2179cb677d50921b1f41da78/Trees)
+- [Tries](https://github.com/cyprus09/CPP-Algorithms/blob/63a8d9fde3c426b029725b06bef670fe419ec283/Tries)
+- [Constructors.cpp](https://github.com/cyprus09/CPP-Algorithms/blob/f5b927756f83d1e08264f640cbfa63f1acf038f7/Constructors.cpp)
+- [HuffmanCode.cpp](https://github.com/cyprus09/CPP-Algorithms/blob/bc7c7ba6b51aac50b205d4365f67fecab05e9734/HuffmanCode.cpp)
 
 ## Arrays
 
